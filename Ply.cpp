@@ -31,7 +31,7 @@ namespace Model {
             long fileSize = ftell(file);
 
             try {
-                vertices = (float*) malloc (ftell(file));
+  //              vertices = (float*) malloc (ftell(file));
             }
             catch (char* ) {
                 return false;
@@ -39,8 +39,8 @@ namespace Model {
             if (vertices == NULL) return -1;
             fseek(file,0,SEEK_SET); 
 
-            triangles = (float*) malloc(fileSize*sizeof(float));
-            normals  = (float*) malloc(fileSize*sizeof(float));
+//            triangles = (float*) malloc(fileSize*sizeof(float));
+//            normals  = (float*) malloc(fileSize*sizeof(float));
 
                 int i = 0;   
                 int temp = 0;
@@ -124,7 +124,7 @@ namespace Model {
                         triangles[triangle_index+6] = vertices[3*vertex3];
                         triangles[triangle_index+7] = vertices[3*vertex3+1];
                         triangles[triangle_index+8] = vertices[3*vertex3+2];
-
+                        /*
                         float coord1[3] = { triangles[triangle_index], triangles[triangle_index+1],triangles[triangle_index+2]};
                         float coord2[3] = {triangles[triangle_index+3],triangles[triangle_index+4],triangles[triangle_index+5]};
                         float coord3[3] = {triangles[triangle_index+6],triangles[triangle_index+7],triangles[triangle_index+8]};
@@ -139,7 +139,7 @@ namespace Model {
                         normals[normal_index+6] = norm[0];
                         normals[normal_index+7] = norm[1];
                         normals[normal_index+8] = norm[2];
-
+*/
                         normal_index += 9;
 
                         triangle_index += 9;

@@ -3,6 +3,11 @@ namespace Model {
     Model::Model(){
         totalConnectedTriangles = 0;
         totalConnectedPoints = 0;
+
+        vertices = new std::vector<float>();
+        triangles = new std::vector<float>();
+        normals = new std::vector<float>();
+        textureCoordinates = new std::vector<float>();
     }
 
     float* Model::calculateNormal(float* coord1, float* coord2, float* coord3){
