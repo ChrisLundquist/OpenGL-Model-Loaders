@@ -15,8 +15,8 @@
 namespace Model {
     class Obj : public Model {
     public: 
-        bool Obj::load(char *filename);   // Loads the model
-        void Obj::release();              // Release the model
+        bool load(char *filename);   // Loads the model
+        void release();              // Release the model
 
     private:
         void parseVertex(Tokenizer& tokenizer);

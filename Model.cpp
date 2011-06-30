@@ -10,6 +10,10 @@ namespace Model {
         textureCoordinates = new std::vector<float>();
     }
 
+    Model::~Model(){
+        release();
+    }
+
     float* Model::calculateNormal(float* coord1, float* coord2, float* coord3){
         /* calculate Vector1 and Vector2 */
         float va[3], vb[3], vr[3], val;
@@ -35,5 +39,12 @@ namespace Model {
         norm[2] = vr[2]/val;
 
         return norm;
+    }
+
+    void Model::release(){
+        delete vertices;
+        delete triangles;
+        delete normals;
+        delete textureCoordinates;
     }
 }

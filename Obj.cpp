@@ -29,7 +29,6 @@ namespace Model {
                     parseVertex(tokenizer);
                 } else if (lineType == "f"){
                     parseFace(tokenizer);
-                    totalConnectedTriangles++;
                 } else if (lineType == "#") {
                     // Line is a comment
                 } else {
@@ -56,7 +55,6 @@ namespace Model {
             else
                 std::cerr << "Error parsing token into vertex component: " << tokenizer.GetToken() << std::endl;
         }
-        totalConnectedPoints += POINTS_PER_VERTEX;   
     }
 
     void Obj::parseFace(Tokenizer& tokenizer){

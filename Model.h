@@ -19,10 +19,12 @@ namespace Model {
 #define KEY_ESCAPE 27
     class Model {
         public: 
-            Model();            
-            float* Model::calculateNormal(float* coord1,float* coord2,float* coord3 );
-            virtual bool Model::load(char *filename) = 0;
-            virtual void Model::release() = 0;
+            Model();
+            virtual ~Model();
+
+            float* calculateNormal(float* coord1,float* coord2,float* coord3 );
+            virtual bool load(char *filename) = 0;
+            virtual void release() = 0;
 
             std::vector<float>* normals;
             std::vector<float>* triangles;
@@ -32,10 +34,10 @@ namespace Model {
             long totalConnectedTriangles;
     };
     template <class T>
+
     bool from_string(T& t, 
         const std::string& s, 
-        std::ios_base& (*f)(std::ios_base&))
-    {
+        std::ios_base& (*f)(std::ios_base&)) {
         std::istringstream iss(s);
         return !(iss >> f >> t).fail();
     }

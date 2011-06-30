@@ -1,8 +1,7 @@
 #ifdef _WIN32
 #include <windows.h>
 #endif
-#include <GL/gl.h>
-#include <GL/glu.h>
+#include <GL/glew.h>
 #include <GL/glut.h>
 #include "Model.h"
 #include "Obj.h"
@@ -56,7 +55,7 @@ void display(void) {
         std::cerr << "OpenGL Error" << std::endl;
 }
 
-void main(int argc, char** argv){
+int main(int argc, char** argv){
     glutInit (&argc, argv);
     glutInitWindowSize (800, 600);
     glutInitDisplayMode ( GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
