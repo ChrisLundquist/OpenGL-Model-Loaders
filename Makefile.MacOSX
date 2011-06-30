@@ -2,12 +2,13 @@ APP = Demo
 CC = g++
 CC_FLAGS = -wall -wextra -pedantic
 FRAMEWORKS = -framework GLUT -framework OpenGL
+LIBS = -lGLEW
 
 %.o: %.cpp
-	    $(CC) $(STANDARD) $(CC_FLAGS) -c $< 
+	$(CC) $(STANDARD) $(CC_FLAGS) -c $< 
 
 all: Tokenizer.o Model.o Obj.o Driver.o
-	$(CC) $(CC_FLAGS) $(FRAMEWORKS) *.o -o $(APP)
+	$(CC) $(CC_FLAGS) $(FRAMEWORKS) $(LIBS) *.o -o $(APP)
 
 clean:
 	rm -f *.o $(APP)

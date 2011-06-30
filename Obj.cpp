@@ -21,24 +21,27 @@ namespace Model {
         int normal_index = 0;
 
         while (! objFile.eof() ) {
+            // Get the next line
             getline (objFile,line);      
+            // Split on space characters
             Tokenizer tokenizer(line," ");
+            // while we have tokens on this line
             while(tokenizer.NextToken()){
                 std::string lineType = tokenizer.GetToken();
                 if(lineType == "v"){
+                    // Line is a vertex
                     parseVertex(tokenizer);
                 } else if (lineType == "f"){
+                    // Line is a face
                     parseFace(tokenizer);
                 } else if (lineType == "#") {
                     // Line is a comment
                 } else {
                     std::cout << "Unhandled line: " << line << std::endl;
                 }
-
-                break;
             }
-
         }
+
         objFile.close();
         triangles->resize(triangles->size());
         normals->resize(normals->size());
