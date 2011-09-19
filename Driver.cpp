@@ -3,10 +3,12 @@
 #endif
 #include <GL/glew.h>
 #include <GL/glut.h>
+#include <glm/glm.hpp>
 #include "Model.h"
 #include "Obj.h"
 
 Model::Obj m = Model::Obj();
+
 
 void usage(){
     std::cout << "Please specify paths to models" << std::endl;
@@ -58,7 +60,6 @@ void display(void) {
 }
 
 void printGLError() {
-    return;
     GLenum fboStatus;
     fboStatus = glCheckFramebufferStatus(GL_DRAW_FRAMEBUFFER);
     std::string error = "";
@@ -125,7 +126,7 @@ int main(int argc, char** argv){
     return;
     }
     */
-    m.load("cube.obj");
+    m.load("cube_cube.obj");
     printGLError();
     glutMainLoop ();
 }

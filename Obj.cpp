@@ -22,7 +22,7 @@ namespace Model {
 
         while (! objFile.eof() ) {
             // Get the next line
-            getline (objFile,line);      
+            getline(objFile,line);      
             // Split on space characters
             Tokenizer tokenizer(line," ");
             // while we have tokens on this line
@@ -35,9 +35,10 @@ namespace Model {
                     // Line is a face
                     parseFace(tokenizer);
                 } else if (lineType == "#") {
-                    // Line is a comment
+                    break;
                 } else {
                     std::cout << "Unhandled line: " << line << std::endl;
+                    break;
                 }
             }
         }
@@ -61,12 +62,14 @@ namespace Model {
     }
 
     void Obj::parseFace(Tokenizer& tokenizer){
-        int vertexNumber[3] = { 0, 0, 0 };
-        
-        for(int i = 0; i < 3; ++i){
-            tokenizer.NextToken();
-            if(from_string<int>(vertexNumber[i],tokenizer.GetToken(),std::dec)){
-                triangles->push_back(vertices->at( vertexNumber[i]- 1));
+        // The index of the vertex to build this face. This will be over written N times
+        // once for each vertex in the face
+        int vertexNumber;
+
+        while(tokenizer.NextToken()){
+            if(from_string<int>(vertexNumber,tokenizer.GetToken(),std::dec)){
+                // -1 because OBJ spec counts from 1
+                triangles->push_back(vertices->at( vertexNumber - 1));
             }
             else
                 std::cerr << "Error parsing token into face component: " << tokenizer.GetToken() << std::endl;
