@@ -24,7 +24,6 @@ class Model_RAW
 	Model_RAW();
     int Model_RAW::Load(char *filename);
 	void Model_RAW::Draw();
-    float* Model_RAW::calculateNormal(float* coord1,float* coord2,float* coord3 );
 
 	float* Normals;
     float* Faces_Triangles;

@@ -12,11 +12,13 @@
 #include <string>
 #include <vector>
 #include <cmath>
-#include <vector>
+#ifdef _WIN32
+#include <windows.h>
+#endif
+#include <GL/glew.h>
+#include <GL/glut.h>
+#include <glm/glm.hpp>
 namespace Model {
-#define POINTS_PER_VERTEX 3
-#define TOTAL_FLOATS_IN_TRIANGLE 9
-#define KEY_ESCAPE 27
     class Model {
         public: 
             Model();
@@ -25,6 +27,7 @@ namespace Model {
             float* calculateNormal(float* coord1,float* coord2,float* coord3 );
             virtual bool load(char *filename) = 0;
             virtual void release() = 0;
+			virtual void draw() = 0;
 
             std::vector<float>* normals;
             std::vector<float>* triangles;
@@ -32,6 +35,8 @@ namespace Model {
             std::vector<float>* textureCoordinates;
             long totalConnectedPoints;
             long totalConnectedTriangles;
+			unsigned vaoID[1];
+			unsigned vboID[1];
     };
     template <class T>
 

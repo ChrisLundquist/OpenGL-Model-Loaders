@@ -14,27 +14,6 @@ void usage(){
     std::cout << "Please specify paths to models" << std::endl;
 }
 
-void draw(Model::Model* model){
-    //glEnable(GL_TEXTURE_2D);	
-    //    glBindTexture(GL_TEXTURE_2D, texturen[0]);
-
-    //    glutSolidTeapot(1);
-    glEnableClientState(GL_VERTEX_ARRAY);	
-    //glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-    glEnableClientState(GL_NORMAL_ARRAY);
-    //    glNormalPointer(GL_FLOAT, 0, model->normals);
-
-    //    glTexCoordPointer(2,GL_FLOAT,0, model->textureCoordinates );
-    glVertexPointer(3,GL_FLOAT,	0,model->triangles);	 
-    glDrawArrays(GL_TRIANGLES, 0, model->totalConnectedTriangles);	
-
-    glDisableClientState(GL_NORMAL_ARRAY);
-    glDisableClientState(GL_VERTEX_ARRAY);    
-    //    glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-
-    //glDisable(GL_TEXTURE_2D);
-}
-
 void reshape(GLint width, GLint height) {
     glViewport(0, 0, width, height);
     glMatrixMode(GL_PROJECTION);
@@ -52,7 +31,7 @@ void display(void) {
     glLoadIdentity();
     glTranslatef(0, 0, -6);
     glColor3f(1,1,1);
-    draw(&m);
+    m.draw();
     glutSwapBuffers();
     int i;
     if(i = glGetError())
@@ -110,6 +89,10 @@ int main(int argc, char** argv){
     glutInitWindowSize (800, 600);
     glutInitDisplayMode ( GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
     glutCreateWindow ("Model Loader Example");
+	if(glewInit() != GLEW_OK){
+		std::cerr << "Error initializing glew" << std::endl;
+		return -1;
+	}
     glutReshapeFunc (reshape);
     glutKeyboardFunc (keyboard);
     glutDisplayFunc (display);
@@ -126,6 +109,7 @@ int main(int argc, char** argv){
     return;
     }
     */
+	glDisable(GL_CULL_FACE);
     m.load("cube_cube.obj");
     printGLError();
     glutMainLoop ();

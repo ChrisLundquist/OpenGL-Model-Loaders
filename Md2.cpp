@@ -15,15 +15,15 @@
 #include <string>
 #include <vector>
 #include <cmath>
+#include "Model.h"
 
 
-
-class Model_MD2 
+class Model_MD2 : public Model::Model
 {
   public: 
     void LoadPCX(char* textureFilename);
     int Load(char *filename, char* textureFilename);
-	void Draw();
+	void draw();
 	void Play(int animation);
 
 	void Stand();
@@ -134,37 +134,6 @@ struct Mesh_UV
   unsigned short s;
   unsigned short t;
  };
-
-
-float* calculateNormal( float *coord1, float *coord2, float *coord3 )
-{
-   /* calculate Vector1 and Vector2 */
-   float va[3], vb[3], vr[3], val;
-   va[0] = coord1[0] - coord2[0];
-   va[1] = coord1[1] - coord2[1];
-   va[2] = coord1[2] - coord2[2];
-
-   vb[0] = coord1[0] - coord3[0];
-   vb[1] = coord1[1] - coord3[1];
-   vb[2] = coord1[2] - coord3[2];
-
-   /* cross product */
-   vr[0] = va[1] * vb[2] - vb[1] * va[2];
-   vr[1] = vb[0] * va[2] - va[0] * vb[2];
-   vr[2] = va[0] * vb[1] - vb[0] * va[1];
-
-   /* normalization factor */
-   val = sqrt( vr[0]*vr[0] + vr[1]*vr[1] + vr[2]*vr[2] );
-
- //  glNormal3f( vr[0]/val, vr[1]/val, vr[2]/val );
-	float norm[3];
-	norm[0] = vr[0]/val;
-	norm[1] = vr[1]/val;
-	norm[2] = vr[2]/val;
-
-
-	return norm;
-}
 
 
 Model_MD2::Model_MD2()
@@ -677,14 +646,12 @@ void Model_MD2::Stand()
 
 }
 
-/*
-void Model_MD2::Draw()
+
+void Model_MD2::draw()
 {
-	/*
+	
 	glRasterPos2i(0,0);
 	glDrawPixels(this->texWidth , this->texHeight, GL_RGB, GL_UNSIGNED_BYTE, this->texture);
-*/
-/*
 
 
     glEnable(GL_TEXTURE_2D);	
@@ -705,4 +672,4 @@ void Model_MD2::Draw()
     glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 
 	glDisable(GL_TEXTURE_2D);
-}*/
+}

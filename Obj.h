@@ -17,6 +17,7 @@ namespace Model {
     public: 
         bool load(char *filename);   // Loads the model
         void release();              // Release the model
+		void draw();
 
     private:
         void parseVertex(Tokenizer& tokenizer);

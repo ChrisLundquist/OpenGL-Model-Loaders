@@ -8,6 +8,8 @@ namespace Model {
         triangles = new std::vector<float>();
         normals = new std::vector<float>();
         textureCoordinates = new std::vector<float>();
+		vaoID[0] = 0;
+		vboID[0] = 0;
     }
 
     Model::~Model(){
@@ -38,6 +40,7 @@ namespace Model {
         norm[1] = vr[1]/val;
         norm[2] = vr[2]/val;
 
+		// FIXME returning local address
         return norm;
     }
 
