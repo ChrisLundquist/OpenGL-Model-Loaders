@@ -1,13 +1,10 @@
 #include "Model.h"
 namespace Model {
     Model::Model(){
-        totalConnectedTriangles = 0;
-        totalConnectedPoints = 0;
-
-        vertices = new std::vector<float>();
-        triangles = new std::vector<float>();
-        normals = new std::vector<float>();
-        textureCoordinates = new std::vector<float>();
+        vertices = std::vector<glm::vec3>();
+        triangles = std::vector<unsigned>();
+        normals = std::vector<glm::vec3>();
+        uvs = std::vector<glm::vec3>();
 		vaoID[0] = 0;
 		vboID[0] = 0;
     }
@@ -16,7 +13,7 @@ namespace Model {
         release();
     }
 
-    float* Model::calculateNormal(float* coord1, float* coord2, float* coord3){
+    float* Model::calculateNormal(float coord1[3], float coord2[3], float coord3[3]){
         /* calculate Vector1 and Vector2 */
         float va[3], vb[3], vr[3], val;
         va[0] = coord1[0] - coord2[0];
@@ -45,9 +42,5 @@ namespace Model {
     }
 
     void Model::release(){
-        delete vertices;
-        delete triangles;
-        delete normals;
-        delete textureCoordinates;
     }
 }

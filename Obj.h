@@ -20,10 +20,8 @@ namespace Model {
 		void draw();
 
     private:
-        void parseVertex(Tokenizer& tokenizer);
+        void parseVertex(Tokenizer& tokenizer, std::vector<glm::vec3>& collection);
         void parseFace(Tokenizer& tokenizer);
+        unsigned indexBufferId;
     };
 }
-
-#define POINTS_PER_VERTEX 3
-#define TOTAL_FLOATS_IN_TRIANGLE 9

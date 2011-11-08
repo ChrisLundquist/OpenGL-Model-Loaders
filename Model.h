@@ -22,19 +22,19 @@ namespace Model {
     class Model {
         public: 
             Model();
+			Model(char* filename);
             virtual ~Model();
-
-            float* calculateNormal(float* coord1,float* coord2,float* coord3 );
+			
+			// calculates the normal of a triangle
+            float* calculateNormal(float coord1[3],float coord2[3],float coord3[3] );
             virtual bool load(char *filename) = 0;
             virtual void release() = 0;
 			virtual void draw() = 0;
 
-            std::vector<float>* normals;
-            std::vector<float>* triangles;
-            std::vector<float>* vertices;
-            std::vector<float>* textureCoordinates;
-            long totalConnectedPoints;
-            long totalConnectedTriangles;
+            std::vector<glm::vec3> normals;
+            std::vector<unsigned> triangles;
+            std::vector<glm::vec3> vertices;
+            std::vector<glm::vec3> uvs;
 			unsigned vaoID[1];
 			unsigned vboID[1];
     };

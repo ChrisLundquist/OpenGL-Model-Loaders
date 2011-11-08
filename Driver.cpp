@@ -6,36 +6,13 @@
 #include <glm/glm.hpp>
 #include "Model.h"
 #include "Obj.h"
+#include "Shader.h"
 
 Model::Obj m = Model::Obj();
 
 
 void usage(){
     std::cout << "Please specify paths to models" << std::endl;
-}
-
-void reshape(GLint width, GLint height) {
-    glViewport(0, 0, width, height);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluPerspective(65.0, (float)width / height, 1, 100);
-    glMatrixMode(GL_MODELVIEW);
-}
-
-void keyboard(unsigned char key, int x, int y){
-
-}
-
-void display(void) {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glLoadIdentity();
-    glTranslatef(0, 0, -6);
-    glColor3f(1,1,1);
-    m.draw();
-    glutSwapBuffers();
-    int i;
-    if(i = glGetError())
-        std::cerr << "OpenGL Error" << std::endl;
 }
 
 void printGLError() {
@@ -73,7 +50,7 @@ void printGLError() {
             case GL_FRAMEBUFFER_INCOMPLETE_LAYER_TARGETS: 
                 error = "Framebuffer Incomplete Layer Targets";
                 
-                // Make sure the number of layers for each // attachment is the same break;
+                // Make sure the number of layers for each attachment is the same
                 break;
             default:
                 error = "Unknown Error";
@@ -81,6 +58,31 @@ void printGLError() {
         }
         std::cerr << error << std::endl;
     }
+}
+
+void reshape(GLint width, GLint height) {
+    glViewport(0, 0, width, height);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(65.0, (float)width / height, 1, 100);
+    glMatrixMode(GL_MODELVIEW);
+}
+
+void keyboard(unsigned char key, int x, int y){
+
+}
+
+void display(void) {
+	static float f = 0.0f;
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glLoadIdentity();
+    glTranslatef(0, 0, -10);
+	glRotatef(f,1.0f,0.0f,0.0f);
+    glColor3f(1,1,1);
+    m.draw();
+    glutSwapBuffers();
+    printGLError();
+	f += 0.1f;
 }
 
 
@@ -96,11 +98,14 @@ int main(int argc, char** argv){
     glutReshapeFunc (reshape);
     glutKeyboardFunc (keyboard);
     glutDisplayFunc (display);
+	glutIdleFunc(display);
     glShadeModel(GL_SMOOTH);                // Enable Smooth Shading
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   // Black Background
     glClearDepth(1.0f);                     // Depth Buffer Setup
     glEnable(GL_DEPTH_TEST);                // Enables Depth Testing
     glDepthFunc(GL_LEQUAL);                 // The Type Of Depth Testing To Do
+    Shader shader("basic.vert","basic.frag");
+    shader.bind();
     printGLError();
     /*
     //TODO, parse argv to load a given model type then render it

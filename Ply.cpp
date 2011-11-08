@@ -114,7 +114,7 @@ namespace Model {
                         //  vertex == punt van vertex lijst
                         // vertex_buffer -> xyz xyz xyz xyz
                         //printf("%f %f %f ", vertices[3*vertex1], vertices[3*vertex1+1], vertices[3*vertex1+2]);
-
+/*
                         triangles[triangle_index] = vertices[3*vertex1];
                         triangles[triangle_index+1] = vertices[3*vertex1+1];
                         triangles[triangle_index+2] = vertices[3*vertex1+2];

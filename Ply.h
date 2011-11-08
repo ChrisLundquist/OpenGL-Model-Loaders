@@ -8,5 +8,7 @@ namespace Model {
             float* quads;
             int totalConnectedQuads;
             int totalFaces;
+            int totalConnectedPoints;
+            int totalConnectedTriangles;
     };
 }
