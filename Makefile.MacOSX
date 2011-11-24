@@ -7,7 +7,7 @@ LIBS = -lGLEW
 %.o: %.cpp
 	$(CC) $(STANDARD) $(CC_FLAGS) -c -g $< 
 
-all: Tokenizer.o Model.o Obj.o Driver.o
+all: Tokenizer.o Model.o Obj.o Driver.o Shader.o
 	$(CC) $(CC_FLAGS) $(FRAMEWORKS) $(LIBS) *.o -o $(APP)
 
 debug: all
